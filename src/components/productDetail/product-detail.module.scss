@@ -1,0 +1,9 @@
+@import "../../style/variable.scss";
+
+.container{
+    @extend .allContainer
+}
+.btnContainer{
+    display: flex;
+    justify-content: right;
+}

@@ -1,0 +1,25 @@
+@import "../../style/variable.scss";
+
+.cartcontent{
+    display: flex;
+    flex-direction: column;
+}
+
+.picture{
+    height: 200px;
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    border: $border;
+    border-radius: 10px;
+}
+
+.title {
+    width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.rating{
+    float: right;
+}

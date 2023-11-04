@@ -1,0 +1,33 @@
+@import "../../style/variable";
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: sticky;
+    background-color: white;
+    top: 0;
+    width: 100%;
+    gap: $gap5;
+    font-size: 1.3rem;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    padding: $p;
+    display: flex;
+    align-items: center;
+}
+
+.link:visited {
+    color: black
+}
+
+.link:hover {
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+}

@@ -1,0 +1,9 @@
+@import "../../style/variable.scss";
+
+.component {
+    @extend .allContainer
+}
+
+.link {
+    text-decoration: none;
+}
