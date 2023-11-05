@@ -16,12 +16,17 @@
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "axios": "^1.6.0",
+    "material-ui-popup-state": "^5.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-image-gallery": "^1.3.0",
     "react-query": "^3.39.3",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "react-swipeable-views-utils": "^0.14.0",
+    "slick-carousel": "^1.8.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -51,6 +56,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.0.5",
+    "@types/react-slick": "^0.23.11",
     "sass": "^1.69.5"
   }
 }

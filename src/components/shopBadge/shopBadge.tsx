@@ -15,10 +15,12 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 export default function CustomizedBadges() {
     const total = useSelector((state: any) => state.shop.total)
     return (
-        <IconButton aria-label="cart">
-            <StyledBadge badgeContent={total} color="secondary">
-                <ShoppingCartIcon />
-            </StyledBadge>
-        </IconButton>
+        <div>
+            <IconButton aria-label="cart">
+                <StyledBadge badgeContent={total} color="secondary">
+                    <ShoppingCartIcon />
+                </StyledBadge>
+            </IconButton>
+        </div>
     );
 }

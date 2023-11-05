@@ -31,3 +31,22 @@
     color: white;
     border-radius: 3px;
 }
+.popoverMenu{
+    display: none;
+    margin: 5px auto 5px 5px;
+}
+.navbar{
+    display: flex;
+}
+.badges{
+    margin-right: 5px;
+}
+
+@media (max-width: 700px) {
+    .navbar{
+        display: none;
+    }
+    .popoverMenu{
+        display: block;
+    }
+}

@@ -3,7 +3,7 @@ import { Product } from "../../types/types"
 import { ListItem, Avatar, List, ListItemAvatar, ListItemText, Typography, IconButton, Alert } from '@mui/material'
 import { Delete } from "@mui/icons-material"
 import { useDispatch, useSelector } from "react-redux"
-import {  grandTotal, totalCalculate } from "../slice/shopSlice"
+import { grandTotal, totalCalculate } from "../slice/shopSlice"
 import styles from "./basket.module.scss"
 
 
@@ -38,7 +38,12 @@ const Basket: React.FC = () => {
     }
     return (
         <div className={styles.container}>
-            <List sx={{ width: '100%', maxWidth: 700, minWidth: 500, bgcolor: "background.paper" }}>
+            <List sx={{
+                width: '100%',
+                maxWidth: 700,
+                minWidth: 300,
+                bgcolor: "background.paper"
+            }}>
                 {basket && basket.map((data) =>
                     <div key={data.id}>
                         <ListItem alignItems="center">
@@ -57,7 +62,11 @@ const Basket: React.FC = () => {
                                 />
                             </ListItemAvatar>
                             <ListItemText
-                                sx={{ width: "50%", minWidth: "220px" }}
+                                sx={{
+                                    width: "50%",
+                                    minWidth: 150,
+                                    float: "left"
+                                }}
                                 secondary={
                                     <Typography
                                         sx={{ display: 'inline' }}
@@ -70,6 +79,10 @@ const Basket: React.FC = () => {
                                 }
                             />
                             <ListItemText
+                                sx={{
+                                    minWidth: 50,
+                                    float: "right"
+                                }}
                                 secondary={
                                     <Typography>
                                         {data.total} $
@@ -81,8 +94,11 @@ const Basket: React.FC = () => {
                             </IconButton>
                         </ListItem>
                     </div>
-                ) }
-                {grandT !== 0 ? <Typography sx={{ float: "right" }}>
+                )}
+                {grandT !== 0 ? <Typography sx={{
+                    float: "right",
+                    marginRight: 2
+                }}>
                     Total: {Math.floor((grandT) * 100) / 100} $
                 </Typography> : <Alert severity="info">Not found product</Alert>}
             </List>
