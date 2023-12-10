@@ -1,0 +1,126 @@
+@import "../../style/variable.scss";
+
+.component {
+    display: flex;
+    overflow: hidden;
+    min-width: 500px;
+    width: 500px;
+    position: relative;
+    align-items: center;
+}
+
+.sliderComponent {
+    display: flex;
+    height: 400px;
+    transition: transform .4s;
+}
+
+.sliderContext {
+    display: flex;
+    height: 400px;
+    width: 500px;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+    margin-right: 1rem;
+    text-decoration: none;
+    color: black
+}
+
+.sliderImage {
+    width: 200px;
+}
+
+.sliderDescription {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+
+.ImageContext{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sliderTitle{
+    overflow: hidden;
+    height: 1.2rem;
+    margin-top: 5px;
+}
+
+.buttonComponent {
+    width: 100%;
+    position: absolute;
+}
+
+.sliderLeftButton {
+    @extend .buttonstyle;
+    left: 1rem;
+}
+
+.sliderLeftButton:hover {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sliderRightButton {
+    @extend .buttonstyle;
+    right: 1rem;
+}
+
+.sliderRightButton:hover {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.buttonstyle {
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 2rem;
+    color: white;
+    border: none;
+    position: absolute;
+}
+
+.description {
+    font-size: 1rem;
+}
+.price{
+    margin-left: auto;
+    color: $color1;
+    font-weight: bold;
+}
+
+@media (max-width: 700px) {
+    .component {
+        min-width: 300px;
+        width: 300px;
+    }
+
+    .sliderComponent{
+        height: 250px;
+    }
+
+    .sliderContext {
+        width: 300px;
+        height: 250px;
+        gap: 5px;
+    }
+
+
+    .sliderImage {
+        width: 100px;
+    }
+
+    .description {
+        width: 100px;
+        overflow: hidden;
+        height: 150px;
+    }
+}
