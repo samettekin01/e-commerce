@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDetailProduct } from "../slice/productsSlice";
 import { useParams } from "react-router-dom";
@@ -6,10 +5,12 @@ import { Button, Card, CardContent, Typography, CircularProgress } from "@mui/ma
 import { Product } from "../../types/types";
 import { totalCalculate } from "../slice/shopSlice";
 import styles from "./product-detail.module.scss"
+import { useAppDispatch, useAppSelector } from "../utils/store";
+
 
 const ProductDetail: React.FC = () => {
-    const dispatch = useDispatch<any>()
-    const { productDetail, productDetailStatus } = useSelector((state: any) => state.products);
+    const dispatch = useAppDispatch()
+    const { productDetail, productDetailStatus } = useAppSelector<any>(state => state.products);
     const { id } = useParams()
     const numberId = Number(id)
 
@@ -31,7 +32,7 @@ const ProductDetail: React.FC = () => {
             if (productID && productID.amount !== undefined) {
                 productID.amount += 1
                 productID.total = productID.amount * product.price
-            }else{
+            } else {
                 basket.push(product)
             }
             localStorage.setItem("basket", JSON.stringify(basket))

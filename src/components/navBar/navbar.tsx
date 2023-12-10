@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { getCategories } from "../slice/categoriesSlice"
 import { Link } from "react-router-dom"
 import { Home } from "@mui/icons-material"
@@ -8,10 +7,11 @@ import { Button, Menu, MenuItem } from "@mui/material"
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state"
 import CustomizedBadges from "../shopBadge/shopBadge"
 import styles from "./navbar.module.scss"
+import { useAppDispatch, useAppSelector } from "../utils/store"
 
 const NavBar = () => {
-    const dispatch = useDispatch<any>();
-    const { categories } = useSelector((state: any) => state.categories);
+    const dispatch = useAppDispatch();
+    const { categories } = useAppSelector(state => state.categories);
 
     useEffect(() => {
         dispatch(getCategories())

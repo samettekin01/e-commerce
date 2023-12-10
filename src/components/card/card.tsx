@@ -4,10 +4,9 @@ import styles from "./card.module.scss"
 
 interface ProductType {
     product: Product
-    value: number
 }
 
-const CardContainer: React.FC<ProductType> = ({ value, product }) => {
+const CardContainer: React.FC<ProductType> = ({ product }) => {
     const { title, image, price, rating } = product;
     return (
         <Card sx={{ maxWidth: 200 }}>

@@ -2,7 +2,7 @@ import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../utils/store';
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -13,7 +13,7 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
     },
 }));
 export default function CustomizedBadges() {
-    const total = useSelector((state: any) => state.shop.total)
+    const { total } = useAppSelector(state => state.shop)
     return (
         <div>
             <IconButton aria-label="cart">

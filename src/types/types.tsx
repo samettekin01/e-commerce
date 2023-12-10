@@ -9,6 +9,6 @@ export type Product = {
         count?: number
         rate?: number
     } | any
-    amount?: number,
+    amount?: number
     total?: number
 }

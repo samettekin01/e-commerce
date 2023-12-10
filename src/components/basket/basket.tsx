@@ -2,15 +2,15 @@ import { useEffect, useState } from "react"
 import { Product } from "../../types/types"
 import { ListItem, Avatar, List, ListItemAvatar, ListItemText, Typography, IconButton, Alert } from '@mui/material'
 import { Delete } from "@mui/icons-material"
-import { useDispatch, useSelector } from "react-redux"
 import { grandTotal, totalCalculate } from "../slice/shopSlice"
 import styles from "./basket.module.scss"
+import { useAppDispatch, useAppSelector } from "../utils/store"
 
 
 const Basket: React.FC = () => {
     const [basket, setBasket] = useState<Product[]>();
-    const grandT = useSelector((state: any) => state.shop.grandTotal);
-    const dispatch = useDispatch<any>();
+    const grandT = useAppSelector(state => state.shop.grandTotal);
+    const dispatch = useAppDispatch();
     const basketString = localStorage.getItem("basket");
 
     useEffect(() => {
@@ -44,7 +44,7 @@ const Basket: React.FC = () => {
                 minWidth: 300,
                 bgcolor: "background.paper"
             }}>
-                {basket && basket.map((data) =>
+                {basket && basket.map(data =>
                     <div key={data.id}>
                         <ListItem alignItems="center">
                             <ListItemText
