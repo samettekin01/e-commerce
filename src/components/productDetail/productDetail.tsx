@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { getDetailProduct } from "../slice/productsSlice";
 import { useParams } from "react-router-dom";
-import { Button, Card, CardContent, Typography, CircularProgress } from "@mui/material";
+import { Button, Card, CardContent, Typography, CircularProgress, Rating } from "@mui/material";
 import { Product } from "../../types/types";
 import { totalCalculate } from "../slice/shopSlice";
-import styles from "./product-detail.module.scss"
 import { useAppDispatch, useAppSelector } from "../utils/store";
+import styles from "./product-detail.module.scss"
 
 
 const ProductDetail: React.FC = () => {
@@ -59,14 +59,16 @@ const ProductDetail: React.FC = () => {
                         }}
                     ></div>
                     <CardContent>
+                        <Rating style={{marginLeft: "auto"}} value={productDetail.rating.rate} precision={0.2} readOnly />
                         <Typography variant="h5" component="div">
                             {productDetail.title}
                         </Typography>
-                        <div className={styles.btnContainer}>
-                            <Button variant="contained" onClick={addBasket}>Add Basket</Button>
-                        </div>
                         <Typography variant="h6" component="div">
                             {productDetail.description}
+                        </Typography>
+                        <Typography component={"span"} className={styles.priceContext}>
+                            <span className={styles.price}>{productDetail.price} $</span>
+                            <Button className={styles.btnContainer} variant="contained" onClick={addBasket}>Add Basket</Button>
                         </Typography>
                     </CardContent>
                 </Card>

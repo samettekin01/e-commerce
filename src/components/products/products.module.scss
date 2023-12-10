@@ -1,7 +1,11 @@
 @import "../../style/variable.scss";
 
 .component {
-    @extend .allContainer
+    @extend .allContainer;
+}
+
+.productsComponent {
+    @extend .allContainer;
 }
 
 .link {

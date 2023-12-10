@@ -1,9 +1,22 @@
 @import "../../style/variable.scss";
 
-.container{
+.container {
     @extend .allContainer
 }
-.btnContainer{
+
+.btnContainer {
     display: flex;
     justify-content: right;
+}
+
+.priceContext {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.price {
+    color: $color1;
+    font-size: 1.5rem;
 }

@@ -23,3 +23,14 @@
 .rating{
     float: right;
 }
+
+.price{
+    color: $color1;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.values{
+    display: flex;
+    flex-direction: column;
+}

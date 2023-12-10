@@ -47,7 +47,7 @@ export const getCategory = createAsyncThunk("categories", async (category: strin
     return promise.data;
 })
 
-export const sliderProducts = createAsyncThunk("sliderProducts", async () => {
+export const getSliderProducts = createAsyncThunk("sliderProducts", async () => {
     const promise = await queryClient.fetchQuery("sliderProducts", () =>
         axios.get(`https://fakestoreapi.com/products?limit=5`)
     )
@@ -90,14 +90,14 @@ const productSlice = createSlice({
             .addCase(getCategory.rejected, (state) => {
                 state.categoryStatus = STATUS.FAIL
             })
-            .addCase(sliderProducts.fulfilled, (state,action) => {
+            .addCase(getSliderProducts.fulfilled, (state,action) => {
                 state.sliderProducts = action.payload
                 state.sliderProductsStatus = STATUS.SUCCESS
             })
-            .addCase(sliderProducts.pending, (state) => {
+            .addCase(getSliderProducts.pending, (state) => {
                 state.categoryStatus = STATUS.LOADING
             })
-            .addCase(sliderProducts.rejected, (state) => {
+            .addCase(getSliderProducts.rejected, (state) => {
                 state.categoryStatus = STATUS.FAIL
             })
     }
