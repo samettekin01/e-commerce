@@ -18,6 +18,8 @@ export const shopSlice = createSlice({
             if (listString) {
                 const list: Product[] = JSON.parse(listString)
                 state.total = Number(list.map(item => item.amount).reduce((prev, cur) => (prev! + cur!), 0))
+            }else{
+                state.total = 0
             }
         },
         grandTotal: (state) => {
@@ -25,6 +27,8 @@ export const shopSlice = createSlice({
             if (listString) {
                 const getBasket: Product[] = JSON.parse(listString)
                 state.grandTotal = Number(getBasket.map((data) => data.total).reduce((prev, cur) => (prev! + cur!), 0))
+            }else{
+                state.grandTotal = 0
             }
         }
     }
