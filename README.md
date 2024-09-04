@@ -5,7 +5,6 @@
 - TypeScript
 - Redux Toolkit
 - Axios
-- Sass
 - Material UI
 - Material Icons
 
