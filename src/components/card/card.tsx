@@ -1,6 +1,5 @@
-import { Card, Typography, CardContent, CardActionArea, Rating } from "@mui/material"
+import { Card, Typography, CardContent, CardActionArea, Rating, Box } from "@mui/material"
 import { Product } from "../../types/types"
-import styles from "./card.module.scss"
 
 interface ProductType {
     product: Product
@@ -11,18 +10,38 @@ const CardContainer: React.FC<ProductType> = ({ product }) => {
     return (
         <Card sx={{ maxWidth: 200 }} >
             <CardActionArea>
-                <div className={styles.picture} style={{ backgroundImage: `url(${image})` }}></div>
+                <Box
+                    component="div"
+                    sx={{
+                        height: "200px",
+                        backgroundPosition: "center",
+                        backgroundSize: "50%",
+                        backgroundRepeat: "no-repeat",
+                        backgroundImage: `url(${image})`
+                    }}
+                ></Box>
                 <CardContent>
-                    <Typography gutterBottom variant="body2" className={styles.title}>
+                    <Rating value={rating.rate} precision={0.2} readOnly sx={{ float: "right" }} />
+                    <Typography
+                        gutterBottom
+                        variant="body2"
+                        sx={{
+                            width: "180px",
+                            overflow: "hidden",
+                            whiteSpace: "nowrap",
+                            textOverflow: "ellipsis"
+                        }}>
                         {title}
                     </Typography>
-                    <Typography className={styles.values} component={"span"}>
-                        <span className={styles.price}> {price} $</span>
-                        <Rating value={rating.rate} precision={0.2} readOnly />
+                    <Typography
+                        component={"span"}
+
+                    >
+                        <Box sx={{ color: "#ff0000", fontWeight: "bold", marginLeft: "auto", marginBottom: 2, float: "right" }}> {price} $</Box>
                     </Typography>
                 </CardContent>
             </CardActionArea>
-        </Card>
+        </Card >
     )
 }
 

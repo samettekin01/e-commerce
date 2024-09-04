@@ -1,14 +1,20 @@
-import NavBar from './components/navBar/navbar'; 
+import NavBar from './components/navBar/navbar';
 import { Outlet } from 'react-router-dom';
-import styles from "./App.module.scss";
+import { Box } from '@mui/material';
 
 function App() {
 
   return (
-    <div className={styles.container}>
+    <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%"
+    }}>
       <NavBar />
       <Outlet />
-    </div>
+    </Box>
   );
 }
 

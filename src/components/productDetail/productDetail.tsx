@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { getDetailProduct } from "../slice/productsSlice";
 import { useParams } from "react-router-dom";
-import { Button, Card, CardContent, Typography, CircularProgress, Rating } from "@mui/material";
+import { Button, Card, CardContent, Typography, CircularProgress, Rating, Box } from "@mui/material";
 import { Product } from "../../types/types";
 import { totalCalculate } from "../slice/shopSlice";
 import { useAppDispatch, useAppSelector } from "../utils/store";
-import styles from "./product-detail.module.scss"
-
 
 const ProductDetail: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -46,34 +44,55 @@ const ProductDetail: React.FC = () => {
         dispatch(getDetailProduct(numberId))
     }, [dispatch, numberId])
     return (
-        <div className={styles.container}>
+        <Box
+            sx={{
+                marginTop: 2,
+                marginBottom: 2
+            }}
+        >
             {productDetailStatus === "LOADING" ? <CircularProgress /> : productDetailStatus === "SUCCESS" &&
                 <Card sx={{ maxWidth: 500 }}>
-                    <div
-                        style={{
+                    <Box
+                        sx={{
                             backgroundImage: `url(${productDetail.image})`,
                             backgroundPosition: "center",
                             backgroundSize: "50%",
                             backgroundRepeat: "no-repeat",
                             height: 350,
                         }}
-                    ></div>
+                    ></Box>
                     <CardContent>
-                        <Rating style={{marginLeft: "auto"}} value={productDetail.rating.rate} precision={0.2} readOnly />
+                        <Rating sx={{ marginLeft: "auto" }} value={productDetail.rating.rate} precision={0.2} readOnly />
                         <Typography variant="h5" component="div">
                             {productDetail.title}
                         </Typography>
                         <Typography variant="h6" component="div">
                             {productDetail.description}
                         </Typography>
-                        <Typography component={"span"} className={styles.priceContext}>
-                            <span className={styles.price}>{productDetail.price} $</span>
-                            <Button className={styles.btnContainer} variant="contained" onClick={addBasket}>Add Basket</Button>
+                        <Typography
+                            component={"span"}
+                            sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                marginTop: 3
+                            }}>
+                            <Box
+                                component="span"
+                                sx={{
+                                    color: "#ff0000",
+                                    fontSize: "1.5rem"
+                                }}
+                            >{productDetail.price} $</Box>
+                            <Button
+                                variant="contained"
+                                onClick={addBasket}
+                            >Add Basket</Button>
                         </Typography>
                     </CardContent>
                 </Card>
             }
-        </div>
+        </Box>
     )
 }
 

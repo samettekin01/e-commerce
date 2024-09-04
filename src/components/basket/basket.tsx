@@ -7,7 +7,6 @@ import {
 } from '@mui/material'
 import { ArrowLeft, ArrowRight, Delete } from "@mui/icons-material"
 import { grandTotal, totalCalculate } from "../slice/shopSlice"
-import styles from "./basket.module.scss"
 import { useAppDispatch, useAppSelector } from "../utils/store"
 
 
@@ -77,15 +76,32 @@ const Basket: React.FC = () => {
         }
     }
     return (
-        <div className={styles.container}>
-            <TableContainer component={Paper} sx={{ display: `${basket?.length ? "flex" : "none"}`, justifyContent: "center" }} >
-                <Table sx={{ maxWidth: 750 }}>
-                    <TableHead>
+        <Box sx={{
+            display: "flex",
+            width: "100%",
+            flexDirection: "column",
+            marginTop: 2
+        }}>
+            <TableContainer
+                component={Paper}
+                sx={{
+                    display: `${basket?.length ? "flex" : "none"}`,
+                    justifyContent: "center",
+                    boxShadow: "0px 1px 4px 0px rgba(0,0,0,0.1)"
+                }} >
+                <Table
+                    sx={{
+                        maxWidth: 750,
+                        display: "table",
+                        tableLayout: "fixed",
+                        width: "100%"
+                    }}>
+                    <TableHead sx={{ '& .MuiTableCell-head': { fontWeight: 'bold' } }}>
                         <TableRow>
-                            <TableCell align="center" sx={{ fontWeight: "bold" }}>Amount</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: "bold" }}>Image</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: "bold" }}>Description</TableCell>
-                            <TableCell align="center" sx={{ fontWeight: "bold" }}>Total</TableCell>
+                            <TableCell align="center">Amount</TableCell>
+                            <TableCell align="center">Image</TableCell>
+                            <TableCell align="center">Description</TableCell>
+                            <TableCell align="center">Total</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -106,7 +122,7 @@ const Basket: React.FC = () => {
                                     <ListItemAvatar>
                                         <Avatar
                                             variant="square"
-                                            sx={{ width: "100px", height: "100px", marginRight: "10px" }}
+                                            sx={{ width: "100%", height: "100%", marginRight: "10px" }}
                                             alt={data.title}
                                             src={data.image}
                                         />
@@ -128,15 +144,15 @@ const Basket: React.FC = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            {basket?.length ? grandT !== 0 && <Typography sx={{ marginLeft: "auto", marginRight: "25%", marginTop: "20px", marginBottom: "20px" }}>
+            {basket?.length ? grandT !== 0 && <Typography sx={{ marginLeft: "auto", marginRight: { xs: 10, md: "25%" }, marginTop: "20px", marginBottom: "20px" }}>
                 <Typography sx={{ fontSize: "1.3rem" }}>
                     <Box component="span" sx={{ fontWeight: "bold" }}>Total:</Box> {Math.floor((grandT) * 100) / 100} $
                 </Typography>
                 <Typography>
-                    <Button sx={{ marginLeft: 9 }} className={styles.btnContainer} variant="contained" onClick={basketDone}>Done</Button>
+                    <Button sx={{ marginLeft: 9 }} variant="contained" onClick={basketDone}>Done</Button>
                 </Typography>
             </Typography> : <Alert severity="info">Not found product</Alert>}
-        </div >
+        </Box >
     )
 }
 

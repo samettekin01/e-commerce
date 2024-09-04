@@ -2,10 +2,9 @@ import { useEffect } from "react";
 import { getProducts } from "../slice/productsSlice";
 import { Link } from "react-router-dom";
 import CardContainer from "../card/card";
-import { CircularProgress } from "@mui/material"
+import { Box, CircularProgress } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../utils/store";
 import Slider from "../slider/slider";
-import styles from "./products.module.scss"
 
 const Products = () => {
     const dispatch = useAppDispatch();
@@ -14,17 +13,34 @@ const Products = () => {
         dispatch(getProducts())
     }, [dispatch])
     return (
-        <div className={styles.component}>
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%"
+            }}
+        >
             <Slider />
-            <div className={styles.productsComponent}>
+            <Box
+                component="div"
+                sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-around",
+                    gap: 4,
+                    marginTop: 2,
+                    width: "100%",
+                    ".link": { textDecoration: "none" }
+                }}
+            >
                 {productsStatus === "SUCCESS" ? products.map(data =>
-                    <Link to={`/${data.category}/product/${data.id}`} key={data.id} className={styles.link}>
+                    <Link to={`/${data.category}/product/${data.id}`} key={data.id} className="link">
                         <CardContainer product={data} />
                     </Link>
                 )
                     : <CircularProgress />}
-            </div>
-        </div >
+            </Box>
+        </Box >
     )
 }
 
