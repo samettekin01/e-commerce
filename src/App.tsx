@@ -1,13 +1,13 @@
 import NavBar from './components/navBar/navbar';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { totalCalculate } from './components/slice/shopSlice';
+import { useAppDispatch } from './components/utils/store';
 
 function App() {
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(totalCalculate())

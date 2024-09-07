@@ -109,12 +109,12 @@ const Basket: React.FC = () => {
                             <TableRow key={data.id}>
                                 <TableCell sx={{ minWidth: 25 }} align="center">
                                     <Typography sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                        <IconButton>
-                                            <ArrowLeft onClick={() => decrement(data.id)} />
+                                        <IconButton onClick={() => decrement(data.id)} >
+                                            <ArrowLeft />
                                         </IconButton>
                                         {data.amount}
-                                        <IconButton>
-                                            <ArrowRight onClick={() => increment(data.id)} />
+                                        <IconButton onClick={() => increment(data.id)}>
+                                            <ArrowRight  />
                                         </IconButton>
                                     </Typography>
                                 </TableCell>
