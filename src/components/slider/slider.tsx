@@ -144,7 +144,11 @@ function Slider() {
                             </Box>
                         </Link>
                     </Box>
-                ) : <CircularProgress />}
+                ) :
+                    <Box sx={{ display: "flex", width: `${width}px`, justifyContent: "center" }}>
+                        <CircularProgress />
+                    </Box>
+                }
             </Box>
             <Button
                 onClick={handleLeft}

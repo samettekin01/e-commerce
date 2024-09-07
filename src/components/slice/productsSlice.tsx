@@ -90,7 +90,7 @@ const productSlice = createSlice({
             .addCase(getCategory.rejected, (state) => {
                 state.categoryStatus = STATUS.FAIL
             })
-            .addCase(getSliderProducts.fulfilled, (state,action) => {
+            .addCase(getSliderProducts.fulfilled, (state, action) => {
                 state.sliderProducts = action.payload
                 state.sliderProductsStatus = STATUS.SUCCESS
             })

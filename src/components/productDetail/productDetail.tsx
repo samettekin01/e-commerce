@@ -62,7 +62,7 @@ const ProductDetail: React.FC = () => {
                         }}
                     ></Box>
                     <CardContent>
-                        <Rating sx={{ marginLeft: "auto" }} value={productDetail.rating.rate} precision={0.2} readOnly />
+                        <Rating sx={{ float: "right" }} value={productDetail.rating.rate} precision={0.2} readOnly />
                         <Typography variant="h5" component="div">
                             {productDetail.title}
                         </Typography>
