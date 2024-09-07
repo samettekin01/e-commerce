@@ -16,6 +16,6 @@ https://patro-e-commerce.netlify.app/
 
 https://fakestoreapi.com/
 
-## Screenshots
-![e-commerce](https://github.com/samettekin01/e-commerce/assets/51747702/b2262a58-fded-4ca8-a8ec-ac290daa1fa3)
-![e-commerce-2](https://github.com/samettekin01/e-commerce/assets/51747702/af92ac49-6b0e-4376-a402-ec4c79976ce3)
+## GIF
+
+![0907](https://github.com/user-attachments/assets/df4cb1a6-dac2-404d-9ada-33a4f8fa8814)
