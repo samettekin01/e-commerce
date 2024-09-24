@@ -1,42 +1,61 @@
 import { useEffect } from "react"
 import { getCategories } from "../slice/categoriesSlice"
 import { Link } from "react-router-dom"
-import { Home } from "@mui/icons-material"
+import { Favorite, Home, Person, Token } from "@mui/icons-material"
 import MenuIcon from "@mui/icons-material/Menu"
 import { Box, Button, Menu, MenuItem } from "@mui/material"
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state"
 import CustomizedBadges from "../shopBadge/shopBadge"
 import { useAppDispatch, useAppSelector } from "../utils/store"
+import SearchButton from "../Search/SearchButton"
 
-const NavBar = () => {
-    const dispatch = useAppDispatch();
-    const { categories } = useAppSelector(state => state.categories);
-
-    const style = {
+export const style = {
+    menu: {
         "& .link": {
             display: "flex",
             justifyContent: "center",
             textDecoration: "none",
             gap: 1,
             color: "#000",
-            fontSize: "1rem",
+            fontSize: "0.9rem",
             borderRadius: 1,
-            padding: 1
         },
         "&:hover": { backgroundColor: "#000" },
         "&:hover .link": { color: "#fff" }
-    }
-
-    const popupStyle = {
+    },
+    utils: {
         display: "flex",
-        textDecoration: "none",
-        gap: 1,
-        color: "#000",
-        fontSize: "1rem",
-        borderRadius: 1,
-        padding: 2,
-        "&:hover": { backgroundColor: "#000", color: "#fff" }
+        alignItems: "center",
+        margin: 1
+    },
+    icon: {
+        fontSize: "1.6rem"
+    },
+    hover: {
+        borderRadius: 2,
+        "&: hover": {
+            backgroundColor: "#000",
+            color: "#fff",
+        }
     }
+}
+
+const popupStyle = {
+    display: "flex",
+    textDecoration: "none",
+    gap: 1,
+    color: "#000",
+    fontSize: "1rem",
+    borderRadius: 1,
+    padding: 2,
+    "&:hover": { backgroundColor: "#000", color: "#fff" }
+}
+
+const NavBar = () => {
+    const dispatch = useAppDispatch();
+    const { categories } = useAppSelector(state => state.categories);
+
+
 
     useEffect(() => {
         dispatch(getCategories())
@@ -45,7 +64,8 @@ const NavBar = () => {
         <Box
             sx={{
                 display: "flex",
-                justifyContent: { xs: "space-between", sm: "center" },
+                justifyContent: { xs: "space-between", sm: "flex-start" },
+                alignItems: "center",
                 position: "sticky",
                 backgroundColor: "#fff",
                 top: 0,
@@ -56,7 +76,7 @@ const NavBar = () => {
             }}>
             <Box
                 sx={{
-                    display: { sm: "none", xs: "block" }, margin: "5px auto 5px 5px",
+                    display: { md: "none", xs: "flex" }, margin: "5px",
                     ".link": {
                         display: "flex",
                         alignItems: "center",
@@ -73,7 +93,7 @@ const NavBar = () => {
                             <Button variant="outlined" {...bindTrigger(popupState)}>
                                 <MenuIcon />
                             </Button>
-                            <Menu {...bindMenu(popupState)} sx={{"& .link": {textDecoration: "none"}}}>
+                            <Menu {...bindMenu(popupState)} sx={{ "& .link": { textDecoration: "none" } }}>
                                 <Link to="/" className="link">
                                     <MenuItem onClick={popupState.close} sx={popupStyle}><Home />Home</MenuItem>
                                 </Link>
@@ -87,18 +107,45 @@ const NavBar = () => {
                     )}
                 </PopupState>
             </Box>
-            <Box sx={{ display: { sm: "flex", xs: "none" }, alignItems: "center" }}>
-                <Button sx={style}>
+            <Box
+                sx={{
+                    width: "10%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginLeft: "10px"
+                }}
+            >
+                <Link to="/" style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    textDecoration: "none",
+                    color: "#000",
+                    fontWeight: "bold"
+                }}>
+                    <Token /><Box sx={{ display: { sm: "flex", xs: "none" } }}>eCom</Box>
+                </Link>
+            </Box>
+            <Box sx={{ display: { md: "flex", xs: "none" }, alignItems: "center", justifyContent: "center", width: "80%" }}>
+                <Button sx={style.menu}>
                     <Link to="/" className="link" ><Home /> Home</Link>
                 </Button>
                 {categories.map((data: string, i: number) =>
-                    <Button key={i} sx={style} >
+                    <Button key={i} sx={style.menu} >
                         <Link to={`category/${data}`} className="link">{data}</Link>
                     </Button>
                 )}
             </Box>
-            <Box sx={{ display: "flex", margin: 1 }}>
-                <Link to="/basket">
+            <Box sx={style.utils} style={{ marginLeft: "auto" }}>
+                <Box sx={style.utils}>
+                    <SearchButton />
+                </Box>
+                <Box sx={style.utils}>
+                    <Person sx={style.icon} />
+                </Box>
+                <Box sx={style.utils}>
+                    <Favorite sx={style.icon} />
+                </Box>
+                <Link to="/basket" style={style.utils}>
                     <CustomizedBadges />
                 </Link>
             </Box>
