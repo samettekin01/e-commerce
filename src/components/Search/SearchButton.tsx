@@ -67,7 +67,7 @@ function SearchButton() {
                             ".link": { color: "#000", textDecoration: "none" }
                         }}>
                             {inputValue && resultSearch && resultSearch?.map((data) =>
-                                <Link to={`/${data.category}/product/${data.id}`} key={data.id} className="link">
+                                <Link to={`/${data.category}/product/${data.id}`} key={data.id} className="link" onClick={() => setIsOpenSearch(false)} >
                                     <ListItemButton key={data.id} sx={style.hover}>
                                         <ListItemText>{data.title}</ListItemText>
                                     </ListItemButton>
