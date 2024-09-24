@@ -56,10 +56,11 @@ function SearchButton() {
                             position: "absolute",
                             overflow: "auto",
                             maxHeight: 300,
-                            backgroundColor: "rgba(0,0,0,0.3)",
+                            backgroundColor: "rgba(255,255,255,0.8)",
                             backdropFilter: "blur(10px)",
                             borderBottomLeftRadius: 10,
-                            borderBottomRightRadius: 10
+                            borderBottomRightRadius: 10,
+                            boxShadow: "10px 2px 10px 0px rgba(0, 0, 0, 0.2)",
                         }}>
                         <ListItem sx={{
                             display: "flex",
