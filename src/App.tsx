@@ -13,8 +13,13 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
     dispatch(totalCalculate())
-  }, [dispatch])
+  }, [dispatch, isOpen])
 
   return (
     <Box sx={{

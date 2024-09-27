@@ -20,9 +20,14 @@ function Favorites() {
                 display: "flex",
                 gap: 2,
                 flexWrap: "wrap",
-                justifyContent: "space-around"
+                justifyContent: "space-around",
+                margin: 2
             }}>
-            {favorites ? favorites.map(data => <CardContainer product={data} key={data.id} />) : <Alert severity="info">Not found favorite</Alert>}
+            {favorites && favorites.length > 0 ? favorites.map(data => <CardContainer product={data} key={data.id} />) :
+                <Box sx={{width: "100%", height: "100%"}}>
+                    <Alert severity="info">Not found favorite</Alert>
+                </Box>
+            }
         </Box>
     )
 }
