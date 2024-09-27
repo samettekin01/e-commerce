@@ -54,7 +54,7 @@ function SignUp() {
                     justifyContent: "center",
                     alignItems: "center",
                     gap: 2,
-                    backgroundColor: "#fff7f5",
+                    backgroundColor: "#fff",
                     padding: 5,
                     borderRadius: 4,
                     width: "50%",
