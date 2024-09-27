@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { getProducts } from "../slice/productsSlice";
-import { Link } from "react-router-dom";
 import CardContainer from "../card/card";
 import { Box, CircularProgress } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../utils/store";
@@ -34,9 +33,7 @@ const Products = () => {
                 }}
             >
                 {productsStatus === "SUCCESS" ? products.map(data =>
-                    <Link to={`/${data.category}/product/${data.id}`} key={data.id} className="link">
-                        <CardContainer product={data} />
-                    </Link>
+                    <CardContainer product={data} key={data.id} />
                 )
                     : <CircularProgress />}
             </Box>

@@ -4,12 +4,13 @@ import ProductDetail from "./components/productDetail/productDetail";
 import Products from "./components/products/products";
 import Category from "./components/category/category";
 import Basket from "./components/basket/basket";
+import Favorites from "./components/Favorites/Favorites";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        children:[
+        children: [
             {
                 index: true,
                 element: <Products />
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
             {
                 path: "/basket",
                 element: <Basket />
+            },
+            {
+                path: "/favorites",
+                element: <Favorites />
             }
         ]
     }

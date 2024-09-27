@@ -29,7 +29,8 @@ export const style = {
         margin: 1
     },
     icon: {
-        fontSize: "1.6rem"
+        fontSize: "1.6rem",
+        color: "#000"
     },
     hover: {
         borderRadius: 2,
@@ -37,6 +38,10 @@ export const style = {
             backgroundColor: "#000",
             color: "#fff",
         }
+    },
+    res: {
+        padding: 0,
+        margin: 0
     }
 }
 
@@ -136,14 +141,20 @@ const NavBar = () => {
                 )}
             </Box>
             <Box sx={style.utils} style={{ marginLeft: "auto" }}>
-                <Box sx={style.utils}>
+                <Box style={style.res}>
                     <SearchButton />
                 </Box>
-                <Box sx={style.utils}>
-                    <Person sx={style.icon} />
+                <Box>
+                    <Button>
+                        <Person sx={style.icon} />
+                    </Button>
                 </Box>
-                <Box sx={style.utils}>
-                    <Favorite sx={style.icon} />
+                <Box>
+                    <Button sx={{ ".link": { display: "flex", alignItems: "center" } }}>
+                        <Link to="/favorites" className="link">
+                            <Favorite sx={style.icon} />
+                        </Link>
+                    </Button>
                 </Box>
                 <Link to="/basket" style={style.utils}>
                     <CustomizedBadges />
