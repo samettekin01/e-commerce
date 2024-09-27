@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { Product } from "../../types/types"
 import CardContainer from "../card/card"
-import { Box } from "@mui/material"
+import { Alert, Box } from "@mui/material"
 
 function Favorites() {
     const [favorites, setFavorites] = useState<Array<Product>>()
@@ -22,7 +22,7 @@ function Favorites() {
                 flexWrap: "wrap",
                 justifyContent: "space-around"
             }}>
-            {favorites ? favorites.map(data => <CardContainer product={data} key={data.id} />) : "No Favorites"}
+            {favorites ? favorites.map(data => <CardContainer product={data} key={data.id} />) : <Alert severity="info">Not found favorite</Alert>}
         </Box>
     )
 }

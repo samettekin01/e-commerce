@@ -1,12 +1,13 @@
-import { useEffect } from "react"
-import { getCategories } from "../slice/categoriesSlice"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Favorite, Home, Person, Token } from "@mui/icons-material"
-import MenuIcon from "@mui/icons-material/Menu"
-import { Box, Button, Menu, MenuItem } from "@mui/material"
+import { Avatar, Box, Button, Menu, MenuItem } from "@mui/material"
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state"
-import CustomizedBadges from "../shopBadge/shopBadge"
+import MenuIcon from "@mui/icons-material/Menu"
 import { useAppDispatch, useAppSelector } from "../utils/store"
+import { getCategories } from "../slice/categoriesSlice"
+import { singUpStatus } from "../slice/statusSlice"
+import CustomizedBadges from "../shopBadge/shopBadge"
 import SearchButton from "../Search/SearchButton"
 
 export const style = {
@@ -45,7 +46,7 @@ export const style = {
     }
 }
 
-const popupStyle = {
+export const popupStyle = {
     display: "flex",
     textDecoration: "none",
     gap: 1,
@@ -57,14 +58,29 @@ const popupStyle = {
 }
 
 const NavBar = () => {
+    const getUser = JSON.parse(localStorage.getItem("user") || '""')
+    const [user, setUser] = useState<boolean>(false)
     const dispatch = useAppDispatch();
     const { categories } = useAppSelector(state => state.categories);
 
-
+    const handleSignUp = () => {
+        if (!getUser) {
+            dispatch(singUpStatus())
+            setUser(getUser)
+        } else {
+            localStorage.removeItem("user")
+            setUser(getUser)
+        }
+    }
 
     useEffect(() => {
         dispatch(getCategories())
-    }, [dispatch])
+        if (getUser) {
+            setUser(getUser)
+        }else{
+            setUser(getUser)
+        }
+    }, [dispatch, getUser])
     return (
         <Box
             sx={{
@@ -145,9 +161,15 @@ const NavBar = () => {
                     <SearchButton />
                 </Box>
                 <Box>
-                    <Button>
-                        <Person sx={style.icon} />
-                    </Button>
+                    {user ?
+                        <Button onClick={handleSignUp}>
+                            <Avatar sx={{ bgcolor: "#ff6800" }}>a</Avatar>
+                        </Button>
+                        :
+                        <Button onClick={handleSignUp}>
+                            <Person sx={style.icon} />
+                        </Button>
+                    }
                 </Box>
                 <Box>
                     <Button sx={{ ".link": { display: "flex", alignItems: "center" } }}>

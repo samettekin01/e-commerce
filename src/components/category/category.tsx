@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { getCategory } from "../slice/productsSlice"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import CardContainer from "../card/card"
 import { Box, CircularProgress } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../utils/store"
@@ -22,14 +22,12 @@ const Category = () => {
                 gap: 5,
                 marginTop: 2,
                 width: "100%",
-                ".link": {textDecoration: "none"}
+                ".link": { textDecoration: "none" }
             }}
         >
             {categoryStatus === "LOADING" ? <CircularProgress /> :
                 categoryStatus === "SUCCESS" && category.map(data =>
-                    <Link to={`/${data.category}/product/${data.id}`} key={data.id} className="link">
-                        <CardContainer product={data} />
-                    </Link>
+                    <CardContainer product={data} key={data.id} />
                 )
             }
         </Box>
