@@ -33,7 +33,7 @@ function SearchButton() {
         }
     }, [isOpenSearch, products, inputValue])
     return (
-        <div style={style.utils} ref={searchRef}>
+        <Box sx={style.utils} ref={searchRef}>
             <Button >
                 <Search sx={style.icon} onClick={handleSearch} />
             </Button>
@@ -80,7 +80,7 @@ function SearchButton() {
                     </List>
                 }
             </Collapse>
-        </div >
+        </Box >
     )
 }
 
