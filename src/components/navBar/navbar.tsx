@@ -60,25 +60,23 @@ export const popupStyle = {
 const NavBar = () => {
     const getUser = JSON.parse(localStorage.getItem("user") || '""')
     const [user, setUser] = useState<boolean>(false)
-    const dispatch = useAppDispatch();
-    const { categories } = useAppSelector(state => state.categories);
+    const dispatch = useAppDispatch()
+    const { categories } = useAppSelector(state => state.categories)
 
     const handleSignUp = () => {
         if (!getUser) {
             dispatch(singUpStatus())
-            setUser(getUser)
+            getUser && setUser(true)
         } else {
             localStorage.removeItem("user")
-            setUser(getUser)
+            setUser(false)
         }
     }
 
     useEffect(() => {
         dispatch(getCategories())
         if (getUser) {
-            setUser(getUser)
-        }else{
-            setUser(getUser)
+            setUser(true)
         }
     }, [dispatch, getUser])
     return (
@@ -163,7 +161,7 @@ const NavBar = () => {
                 <Box>
                     {user ?
                         <Button onClick={handleSignUp}>
-                            <Avatar sx={{ bgcolor: "#ff6800" }}>a</Avatar>
+                            <Avatar sx={{ bgcolor: "#ff6800" }}>{getUser.name !== "" ? getUser.name.slice(0,1) : "A"}</Avatar>
                         </Button>
                         :
                         <Button onClick={handleSignUp}>
@@ -186,4 +184,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar;
+export default NavBar

@@ -3,12 +3,7 @@ import { Box, Button, TextField, Typography } from "@mui/material"
 import { useEffect, useRef, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../utils/store"
 import { singUpStatus } from "../slice/statusSlice"
-
-interface UserInformation {
-    name?: string
-    mail?: string
-    pass?: string
-}
+import { UserInformation } from "../../types/types"
 
 function SignUp() {
     const signUpRef = useRef<HTMLDivElement | null>(null)
