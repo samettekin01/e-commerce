@@ -144,7 +144,7 @@ const Basket: React.FC = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            {basket?.length ? grandT !== 0 && <Typography sx={{ marginLeft: "auto", marginRight: { xs: 10, md: "25%" }, marginTop: "20px", marginBottom: "20px" }}>
+            {basket?.length ? grandT !== 0 && <Typography component="div" sx={{ marginLeft: "auto", marginRight: { xs: 10, md: "25%" }, marginTop: "20px", marginBottom: "20px" }}>
                 <Typography sx={{ fontSize: "1.3rem" }}>
                     <Box component="span" sx={{ fontWeight: "bold" }}>Total:</Box> {Math.floor((grandT) * 100) / 100} $
                 </Typography>

@@ -1,7 +1,7 @@
 import { Search } from "@mui/icons-material"
 import { style } from "../navBar/navbar"
 import { useEffect, useRef, useState } from "react"
-import { Box, Collapse, List, ListItem, ListItemButton, ListItemText, TextField } from "@mui/material"
+import { Box, Button, Collapse, List, ListItem, ListItemButton, ListItemText, TextField } from "@mui/material"
 import { useAppSelector } from "../utils/store"
 import { Product } from "../../types/types"
 import { Link } from "react-router-dom"
@@ -33,16 +33,18 @@ function SearchButton() {
         }
     }, [isOpenSearch, products, inputValue])
     return (
-        <Box sx={style.utils} ref={searchRef}>
-            <Search sx={style.icon} onClick={handleSearch} />
-            <Collapse in={isOpenSearch} orientation="horizontal">
+        <div style={style.utils} ref={searchRef}>
+            <Button >
+                <Search sx={style.icon} onClick={handleSearch} />
+            </Button>
+            <Collapse in={isOpenSearch} orientation="horizontal" sx={style.res}>
                 <TextField
                     sx={{
                         minWidth: "135px",
                         width: "100%"
                     }}
                     variant="standard"
-                    label="Search"
+                    placeholder="Search"
                     autoFocus
                     value={inputValue}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +80,7 @@ function SearchButton() {
                     </List>
                 }
             </Collapse>
-        </Box >
+        </div >
     )
 }
 
