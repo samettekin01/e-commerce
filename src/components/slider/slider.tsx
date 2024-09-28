@@ -1,16 +1,24 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../utils/store"
-import { getDetailProduct, getSliderProducts } from "../slice/productsSlice";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { getDetailProduct, getSliderProducts } from "../slice/productsSlice"
+import { Box, Button, CircularProgress } from "@mui/material"
 import { KeyboardArrowLeftOutlined, KeyboardArrowRightOutlined } from "@mui/icons-material"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 function Slider() {
-    const dispatch = useAppDispatch();
-    const { sliderProducts, sliderProductsStatus } = useAppSelector(state => state.products);
+    const dispatch = useAppDispatch()
+    const { sliderProducts, sliderProductsStatus } = useAppSelector(state => state.products)
     const sliderLength = sliderProducts.length
+
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [style, setStyle] = useState<styleType>({ transform: `translateX(0%)` });
+
+    const [touchStart, setTouchStart] = useState(0)
+    const [touchEnd, setTouchEnd] = useState(0)
+    const minSwipeDistance = 50
+
+    const [isActive, setIsActive] = useState<boolean>(true)
+
+    const [style, setStyle] = useState<styleType>({ transform: `translateX(0%)` })
     const [width, setWidth] = useState<Number>(window.innerWidth)
 
     const buttonStyle = {
@@ -34,6 +42,52 @@ function Slider() {
         }
     }
 
+    interface styleType {
+        transform: string
+    }
+
+    const handleLeft = () => {
+        setIsActive(false)
+        setCurrentIndex((currentIndex - 1 + sliderLength) % sliderLength)
+        setStyle(prevStyle => ({
+            ...prevStyle,
+            transform: `translateX(-${(currentIndex - 1 + sliderLength) % sliderLength * 20}%)`
+        }))
+        setTimeout(() => {
+            setIsActive(true);
+        }, 2000);
+    }
+
+    const handleRight = useCallback(() => {
+        setIsActive(false)
+        setCurrentIndex((currentIndex + 1) % sliderLength)
+        setStyle(prevStyle => ({
+            ...prevStyle,
+            transform: `translateX(-${(currentIndex + 1) % sliderLength * 20}%)`
+        }))
+        setTimeout(() => {
+            setIsActive(true);
+        }, 2000);
+    }, [currentIndex, sliderLength])
+
+    const onTouchStart = (e: any) => {
+        setTouchStart(e.targetTouches[0].clientX)
+    }
+
+    const onTouchMove = (e: any) => {
+        setTouchEnd(e.targetTouches[0].clientX)
+    }
+
+    const onTouchEnd = () => {
+        if (touchStart - touchEnd < -minSwipeDistance) {
+            handleLeft()
+        }
+
+        if (touchStart - touchEnd > minSwipeDistance) {
+            handleRight()
+        }
+    }
+
     useEffect(() => {
         dispatch(getSliderProducts())
         window.addEventListener("resize", () => {
@@ -41,25 +95,20 @@ function Slider() {
         })
     }, [dispatch])
 
-    interface styleType {
-        transform: string
-    }
+    useEffect(() => {
+        let timeOut: ReturnType<typeof setInterval> | null = null
+        if (isActive) {
+            timeOut = setInterval(handleRight, 5000)
+        } else {
+            timeOut !== null && clearInterval(timeOut)
+        }
+        return () => {
+            if (timeOut !== null) {
+                clearInterval(timeOut);
+            }
+        }
+    }, [isActive, handleRight])
 
-    const handleLeft = () => {
-        setCurrentIndex((currentIndex - 1 + sliderLength) % sliderLength)
-        setStyle(prevStyle => ({
-            ...prevStyle,
-            transform: `translateX(-${(currentIndex - 1 + sliderLength) % sliderLength * 20}%)`
-        }));
-    }
-
-    const handleRight = () => {
-        setCurrentIndex((currentIndex + 1) % sliderLength)
-        setStyle(prevStyle => ({
-            ...prevStyle,
-            transform: `translateX(-${(currentIndex + 1) % sliderLength * 20}%)`
-        }));
-    }
     return (
         <Box
             sx={{
@@ -84,6 +133,9 @@ function Slider() {
                     <Box
                         key={data.id}
                         onClick={() => dispatch(getDetailProduct(data.id))}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
                         sx={{
                             width: `${width}px`,
                             display: "flex",
@@ -166,4 +218,4 @@ function Slider() {
     )
 }
 
-export default Slider;
+export default Slider

@@ -16,7 +16,6 @@ const CardContainer: React.FC<ProductType> = ({ product }) => {
         const getFav = JSON.parse(localStorage.getItem("favorites") || '""') || []
         const productList: Product = product || []
         const findProduct = getFav.findIndex((item: Product) => item.id === product.id)
-        console.log(findProduct)
         if (!getFav && getFav[0] === null) {
             localStorage.setItem("favorites", JSON.stringify(product))
         } else if (findProduct === -1) {
