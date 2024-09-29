@@ -5,10 +5,14 @@ import { Button, Card, CardContent, Typography, CircularProgress, Rating, Box } 
 import { Product } from "../../types/types";
 import { totalCalculate } from "../slice/shopSlice";
 import { useAppDispatch, useAppSelector } from "../utils/store";
+import { useFavorite } from "../utils/useFavorite";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 const ProductDetail: React.FC = () => {
     const dispatch = useAppDispatch()
     const { productDetail, productDetailStatus } = useAppSelector<any>(state => state.products);
+
+    const { handleFavorite, favorite } = useFavorite(productDetail)
     const { id } = useParams()
     const numberId = Number(id)
 
@@ -84,10 +88,15 @@ const ProductDetail: React.FC = () => {
                                     fontSize: "1.5rem"
                                 }}
                             >{productDetail.price} $</Box>
-                            <Button
-                                variant="contained"
-                                onClick={addBasket}
-                            >Add Basket</Button>
+                            <Box>
+                                <Button
+                                    variant="contained"
+                                    onClick={addBasket}
+                                >Add Basket</Button>
+                                <Button onClick={handleFavorite}>
+                                    {favorite !== -1 ? <Favorite /> : <FavoriteBorder />}
+                                </Button>
+                            </Box>
                         </Typography>
                     </CardContent>
                 </Card>
