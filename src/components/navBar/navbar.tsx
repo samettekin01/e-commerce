@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { Favorite, Home, Person, Token } from "@mui/icons-material"
-import { Avatar, Box, Button, Menu, MenuItem } from "@mui/material"
+import { Avatar, Box, Button, Menu, MenuItem, Tooltip } from "@mui/material"
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state"
 import MenuIcon from "@mui/icons-material/Menu"
 import { useAppDispatch, useAppSelector } from "../utils/store"
@@ -155,30 +155,40 @@ const NavBar = () => {
                 )}
             </Box>
             <Box sx={style.utils} style={{ marginLeft: "auto" }}>
-                <Box style={style.res}>
-                    <SearchButton />
-                </Box>
+                <Tooltip title="Search" placement="bottom">
+                    <Box style={style.res}>
+                        <SearchButton />
+                    </Box>
+                </Tooltip>
                 <Box>
                     {user ?
-                        <Button onClick={handleSignUp}>
-                            <Avatar sx={{ bgcolor: "#ff6800" }}>{getUser.name !== "" ? getUser.name.slice(0,1) : "A"}</Avatar>
-                        </Button>
+                        <Tooltip title="SignOut" placement="bottom">
+                            <Button onClick={handleSignUp}>
+                                <Avatar sx={{ bgcolor: "#ff6800" }}>{getUser.name !== "" ? getUser.name.slice(0, 1) : "A"}</Avatar>
+                            </Button>
+                        </Tooltip>
                         :
-                        <Button onClick={handleSignUp}>
-                            <Person sx={style.icon} />
-                        </Button>
+                        <Tooltip title="SignIn/SignUp" placement="bottom">
+                            <Button onClick={handleSignUp}>
+                                <Person sx={style.icon} />
+                            </Button>
+                        </Tooltip>
                     }
                 </Box>
                 <Box>
-                    <Button sx={{ ".link": { display: "flex", alignItems: "center" } }}>
-                        <Link to="/favorites" className="link">
-                            <Favorite sx={style.icon} />
-                        </Link>
-                    </Button>
+                    <Tooltip title="Favorite(s)" placement="bottom">
+                        <Button sx={{ ".link": { display: "flex", alignItems: "center" } }}>
+                            <Link to="/favorites" className="link">
+                                <Favorite sx={style.icon} />
+                            </Link>
+                        </Button>
+                    </Tooltip>
                 </Box>
-                <Link to="/basket" style={style.utils}>
-                    <CustomizedBadges />
-                </Link>
+                <Tooltip title="Basket" placement="bottom">
+                    <Link to="/basket" style={style.utils}>
+                        <CustomizedBadges />
+                    </Link>
+                </Tooltip>
             </Box>
         </Box>
     )
