@@ -4,13 +4,18 @@ import CardContainer from "../card/card";
 import { Box, CircularProgress } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../utils/store";
 import Slider from "../slider/slider";
+import Filter from "../Filter/Filter";
+import useFilter from "../utils/useFilter";
 
 const Products = () => {
     const dispatch = useAppDispatch();
-    const { products, productsStatus } = useAppSelector(state => state.products)
+    const { products } = useAppSelector(state => state.products)
+    const { sort, handleFilter, filterVal } = useFilter({ products })
+
     useEffect(() => {
         dispatch(getProducts())
     }, [dispatch])
+
     return (
         <Box
             sx={{
@@ -21,6 +26,7 @@ const Products = () => {
             }}
         >
             <Slider />
+            <Filter handleFilter={handleFilter} filterVal={filterVal} />
             <Box
                 component="div"
                 sx={{
@@ -33,7 +39,7 @@ const Products = () => {
                     ".link": { textDecoration: "none" }
                 }}
             >
-                {productsStatus === "SUCCESS" ? products.map(data =>
+                {sort ? sort.map(data =>
                     <CardContainer product={data} key={data.id} />
                 )
                     : <CircularProgress />}

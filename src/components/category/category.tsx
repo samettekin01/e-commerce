@@ -4,10 +4,13 @@ import { useParams } from "react-router-dom"
 import CardContainer from "../card/card"
 import { Box, CircularProgress } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../utils/store"
+import useFilter from "../utils/useFilter"
+import Filter from "../Filter/Filter"
 
 const Category = () => {
     const dispatch = useAppDispatch();
     const { category, categoryStatus } = useAppSelector(state => state.products);
+    const { sort, handleFilter, filterVal } = useFilter({ products: category })
     const { categoryName } = useParams()
     const stringId = String(categoryName)
     useEffect(() => {
@@ -17,19 +20,25 @@ const Category = () => {
         <Box
             sx={{
                 display: "flex",
+                flexDirection: "column",
+                width: "100%",
+            }}
+        >
+            <Filter handleFilter={handleFilter} filterVal={filterVal} />
+            <Box sx={{
+                display: "flex",
                 flexWrap: "wrap",
                 justifyContent: "space-around",
                 gap: 5,
                 marginTop: 2,
                 width: "100%",
-                ".link": { textDecoration: "none" }
-            }}
-        >
-            {categoryStatus === "LOADING" ? <CircularProgress /> :
-                categoryStatus === "SUCCESS" && category.map(data =>
-                    <CardContainer product={data} key={data.id} />
-                )
-            }
+            }}>
+                {categoryStatus === "LOADING" ? <CircularProgress /> :
+                    categoryStatus === "SUCCESS" && sort && sort.map(data =>
+                        <CardContainer product={data} key={data.id} />
+                    )
+                }
+            </Box>
         </Box>
     )
 }
