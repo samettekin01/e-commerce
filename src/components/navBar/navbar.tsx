@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Favorite, Home, Person, Token } from "@mui/icons-material"
 import { Avatar, Box, Button, Menu, MenuItem, Tooltip } from "@mui/material"
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state"
@@ -62,6 +62,7 @@ const NavBar = () => {
     const [user, setUser] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const { categories } = useAppSelector(state => state.categories)
+    const { categoryName } = useParams()
 
     const handleSignUp = () => {
         if (!getUser) {
@@ -75,10 +76,13 @@ const NavBar = () => {
 
     useEffect(() => {
         dispatch(getCategories())
+    }, [dispatch])
+
+    useEffect(() => {
         if (getUser) {
             setUser(true)
         }
-    }, [dispatch, getUser])
+    }, [getUser])
     return (
         <Box
             sx={{
@@ -145,12 +149,19 @@ const NavBar = () => {
                 </Link>
             </Box>
             <Box sx={{ display: { md: "flex", xs: "none" }, alignItems: "center", justifyContent: "center", width: "80%" }}>
-                <Button sx={style.menu}>
-                    <Link to="/" className="link" ><Home /> Home</Link>
+                <Button
+                    sx={style.menu}
+                    style={{ backgroundColor: categoryName === undefined ? "#000" : "" }} >
+                    <Link to="/" className="link" style={{ color: categoryName === undefined ? "#fff" : "" }} ><Home /> Home</Link>
                 </Button>
                 {categories.map((data: string, i: number) =>
-                    <Button key={i} sx={style.menu} >
-                        <Link to={`category/${data}`} className="link">{data}</Link>
+                    <Button
+                        key={i}
+                        sx={style.menu}
+                        style={{
+                            backgroundColor: categoryName === data ? "#000" : ""
+                        }} >
+                        <Link to={`category/${data}`} className="link" style={{ color: categoryName === data ? "#fff" : "" }}>{data}</Link>
                     </Button>
                 )}
             </Box>

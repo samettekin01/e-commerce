@@ -1,14 +1,17 @@
 import { useCallback, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../utils/store"
-import { getDetailProduct, getSliderProducts } from "../slice/productsSlice"
+import { getCategory, getDetailProduct, getSliderProducts } from "../slice/productsSlice"
 import { Box, Button, CircularProgress } from "@mui/material"
 import { KeyboardArrowLeftOutlined, KeyboardArrowRightOutlined } from "@mui/icons-material"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
+import { Product } from "../../types/types"
 
 function Slider() {
     const dispatch = useAppDispatch()
-    const { sliderProducts, sliderProductsStatus } = useAppSelector(state => state.products)
-    const sliderLength = sliderProducts.length
+    const { sliderProducts } = useAppSelector(state => state.products)
+    const { category } = useAppSelector(state => state.products)
+    const [sliderContent, setSliderContent] = useState<Product[]>()
+    const sliderLength = sliderContent && sliderContent.length
 
     const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -20,6 +23,8 @@ function Slider() {
 
     const [style, setStyle] = useState<styleType>({ transform: `translateX(0%)` })
     const [width, setWidth] = useState<Number>(window.innerWidth)
+
+    const { categoryName } = useParams()
 
     const buttonStyle = {
         default: {
@@ -47,27 +52,31 @@ function Slider() {
     }
 
     const handleLeft = () => {
-        setIsActive(false)
-        setCurrentIndex((currentIndex - 1 + sliderLength) % sliderLength)
-        setStyle(prevStyle => ({
-            ...prevStyle,
-            transform: `translateX(-${(currentIndex - 1 + sliderLength) % sliderLength * 20}%)`
-        }))
-        setTimeout(() => {
-            setIsActive(true);
-        }, 2000);
+        if (sliderLength) {
+            setIsActive(false)
+            setCurrentIndex((currentIndex - 1 + sliderLength) % sliderLength)
+            setStyle(prevStyle => ({
+                ...prevStyle,
+                transform: `translateX(-${(currentIndex - 1 + sliderLength) % sliderLength * 20}%)`
+            }))
+            setTimeout(() => {
+                setIsActive(true)
+            }, 2000)
+        }
     }
 
     const handleRight = useCallback(() => {
-        setIsActive(false)
-        setCurrentIndex((currentIndex + 1) % sliderLength)
-        setStyle(prevStyle => ({
-            ...prevStyle,
-            transform: `translateX(-${(currentIndex + 1) % sliderLength * 20}%)`
-        }))
-        setTimeout(() => {
-            setIsActive(true);
-        }, 2000);
+        if (sliderLength) {
+            setIsActive(false)
+            setCurrentIndex((currentIndex + 1) % sliderLength)
+            setStyle(prevStyle => ({
+                ...prevStyle,
+                transform: `translateX(-${(currentIndex + 1) % sliderLength * (100 / sliderLength)}%)`
+            }))
+            setTimeout(() => {
+                setIsActive(true)
+            }, 2000)
+        }
     }, [currentIndex, sliderLength])
 
     const onTouchStart = (e: any) => {
@@ -89,11 +98,24 @@ function Slider() {
     }
 
     useEffect(() => {
-        dispatch(getSliderProducts())
+        if (categoryName) {
+            dispatch(getCategory(String(categoryName)))
+        } else {
+            dispatch(getSliderProducts())
+        }
         window.addEventListener("resize", () => {
             setWidth(window.innerWidth)
         })
-    }, [dispatch])
+    }, [dispatch, categoryName])
+
+    useEffect(() => {
+        if (categoryName) {
+            setSliderContent(category)
+        } else if (categoryName === undefined) {
+            setSliderContent(sliderProducts)
+        }
+        setStyle({ transform: `translateX(0%)` })
+    }, [categoryName, category, sliderProducts])
 
     useEffect(() => {
         let timeOut: ReturnType<typeof setInterval> | null = null
@@ -104,7 +126,7 @@ function Slider() {
         }
         return () => {
             if (timeOut !== null) {
-                clearInterval(timeOut);
+                clearInterval(timeOut)
             }
         }
     }, [isActive, handleRight])
@@ -129,7 +151,7 @@ function Slider() {
                 }}
                 style={style}
             >
-                {sliderProductsStatus === "SUCCESS" ? sliderProducts.map(data =>
+                {sliderContent ? sliderContent.map(data =>
                     <Box
                         key={data.id}
                         onClick={() => dispatch(getDetailProduct(data.id))}

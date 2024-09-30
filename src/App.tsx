@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { totalCalculate } from './components/slice/shopSlice';
 import { useAppDispatch, useAppSelector } from './components/utils/store';
 import SignUp from './components/SignUp/SignUp';
+import Slider from './components/slider/slider';
 
 function App() {
 
@@ -25,11 +26,11 @@ function App() {
     <Box sx={{
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
       width: "100%",
       height: "100%"
     }}>
       <NavBar />
+      <Slider />
       <Outlet />
       {isOpen && <SignUp />}
     </Box>

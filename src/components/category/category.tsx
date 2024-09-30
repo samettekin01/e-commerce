@@ -21,7 +21,9 @@ const Category = () => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "100%",
+                margin: "0 auto",
+                width: "70%",
+                height: "100%"
             }}
         >
             <Filter handleFilter={handleFilter} filterVal={filterVal} />

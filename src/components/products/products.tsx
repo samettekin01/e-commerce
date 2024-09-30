@@ -3,7 +3,6 @@ import { getProducts } from "../slice/productsSlice";
 import CardContainer from "../card/card";
 import { Box, CircularProgress } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../utils/store";
-import Slider from "../slider/slider";
 import Filter from "../Filter/Filter";
 import useFilter from "../utils/useFilter";
 
@@ -21,11 +20,11 @@ const Products = () => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "100%",
+                margin: "0 auto",
+                width: "70%",
                 height: "100%"
             }}
         >
-            <Slider />
             <Filter handleFilter={handleFilter} filterVal={filterVal} />
             <Box
                 component="div"
