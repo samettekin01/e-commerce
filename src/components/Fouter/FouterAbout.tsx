@@ -8,7 +8,7 @@ function FouterAbout() {
             flexWrap: "wrap",
             justifyContent: "space-around",
             width: "100%",
-            margin: 2
+            marginTop: 2
         }}
         >
             <Box sx={footerAbout}
