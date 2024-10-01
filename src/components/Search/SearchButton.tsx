@@ -1,10 +1,10 @@
 import { Search } from "@mui/icons-material"
-import { style } from "../navBar/navbar"
 import { useEffect, useRef, useState } from "react"
 import { Box, Button, Collapse, List, ListItem, ListItemButton, ListItemText, TextField } from "@mui/material"
 import { useAppSelector } from "../utils/store"
 import { Product } from "../../types/types"
 import { Link } from "react-router-dom"
+import { style } from "../../style"
 
 function SearchButton() {
     const { products } = useAppSelector(state => state.products)
@@ -67,6 +67,7 @@ function SearchButton() {
                         <ListItem sx={{
                             display: "flex",
                             flexDirection: "column",
+                            alignItems: "start",
                             ".link": { color: "#000", textDecoration: "none" }
                         }}>
                             {inputValue && resultSearch && resultSearch?.map((data) =>

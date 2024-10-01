@@ -50,6 +50,8 @@ const ProductDetail: React.FC = () => {
     return (
         <Box
             sx={{
+                display: "flex",
+                justifyContent: "center",
                 marginTop: 2,
                 marginBottom: 2
             }}

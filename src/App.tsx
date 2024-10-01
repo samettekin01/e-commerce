@@ -1,5 +1,5 @@
 import NavBar from './components/navBar/navbar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
 import { totalCalculate } from './components/slice/shopSlice';
@@ -10,6 +10,9 @@ import Slider from './components/slider/slider';
 function App() {
 
   const { isOpen } = useAppSelector(state => state.status)
+  const { id } = useParams()
+  const location = useLocation()
+  const pathReg = /(basket|favorites)/g
 
   const dispatch = useAppDispatch()
 
@@ -20,7 +23,7 @@ function App() {
       document.body.style.overflow = ""
     }
     dispatch(totalCalculate())
-  }, [dispatch, isOpen])
+  }, [dispatch, isOpen, location])
 
   return (
     <Box sx={{
@@ -30,7 +33,7 @@ function App() {
       height: "100%"
     }}>
       <NavBar />
-      <Slider />
+      {!id && !location.pathname.match(pathReg) && <Slider />}
       <Outlet />
       {isOpen && <SignUp />}
     </Box>

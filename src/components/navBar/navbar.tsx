@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { Favorite, Home, Person, Token } from "@mui/icons-material"
+import { ExitToApp, Favorite, Home, Person, Token } from "@mui/icons-material"
 import { Avatar, Box, Button, Menu, MenuItem, Tooltip } from "@mui/material"
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state"
 import MenuIcon from "@mui/icons-material/Menu"
@@ -9,58 +9,17 @@ import { getCategories } from "../slice/categoriesSlice"
 import { singUpStatus } from "../slice/statusSlice"
 import CustomizedBadges from "../shopBadge/shopBadge"
 import SearchButton from "../Search/SearchButton"
+import { popupStyle, style } from "../../style"
 
-export const style = {
-    menu: {
-        "& .link": {
-            display: "flex",
-            justifyContent: "center",
-            textDecoration: "none",
-            gap: 1,
-            color: "#000",
-            fontSize: "0.9rem",
-            borderRadius: 1,
-        },
-        "&:hover": { backgroundColor: "#000" },
-        "&:hover .link": { color: "#fff" }
-    },
-    utils: {
-        display: "flex",
-        alignItems: "center",
-        margin: 1
-    },
-    icon: {
-        fontSize: "1.6rem",
-        color: "#000"
-    },
-    hover: {
-        borderRadius: 2,
-        "&: hover": {
-            backgroundColor: "#000",
-            color: "#fff",
-        }
-    },
-    res: {
-        padding: 0,
-        margin: 0
-    }
-}
-
-export const popupStyle = {
-    display: "flex",
-    textDecoration: "none",
-    gap: 1,
-    color: "#000",
-    fontSize: "1rem",
-    borderRadius: 1,
-    padding: 2,
-    "&:hover": { backgroundColor: "#000", color: "#fff" }
-}
 
 const NavBar = () => {
     const getUser = JSON.parse(localStorage.getItem("user") || '""')
     const [user, setUser] = useState<boolean>(false)
+    const [isOpenMenu, setIsOpenMenu] = useState<null | HTMLElement>(null)
+    const open = Boolean(isOpenMenu)
+
     const dispatch = useAppDispatch()
+
     const { categories } = useAppSelector(state => state.categories)
     const { categoryName } = useParams()
 
@@ -71,7 +30,12 @@ const NavBar = () => {
         } else {
             localStorage.removeItem("user")
             setUser(false)
+            setIsOpenMenu(null)
         }
+    }
+
+    const handleOpenMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+        setIsOpenMenu(e.currentTarget)
     }
 
     useEffect(() => {
@@ -83,6 +47,7 @@ const NavBar = () => {
             setUser(true)
         }
     }, [getUser])
+
     return (
         <Box
             sx={{
@@ -113,12 +78,12 @@ const NavBar = () => {
                 <PopupState variant="popover" popupId="demo-popup-menu">
                     {(popupState) => (
                         <>
-                            <Button variant="outlined" {...bindTrigger(popupState)}>
-                                <MenuIcon />
+                            <Button {...bindTrigger(popupState)}>
+                                <MenuIcon sx={{color: "#000"}} />
                             </Button>
                             <Menu {...bindMenu(popupState)} sx={{ "& .link": { textDecoration: "none" } }}>
                                 <Link to="/" className="link">
-                                    <MenuItem onClick={popupState.close} sx={popupStyle}><Home />Home</MenuItem>
+                                    <MenuItem onClick={popupState.close} sx={popupStyle}>Home <Home /></MenuItem>
                                 </Link>
                                 {categories.map((data: string, i: number) =>
                                     <Link to={`category/${data}`} key={i} className="link">
@@ -173,8 +138,8 @@ const NavBar = () => {
                 </Tooltip>
                 <Box>
                     {user ?
-                        <Tooltip title="SignOut" placement="bottom">
-                            <Button onClick={handleSignUp}>
+                        <Tooltip title="SignOut" id="user-button">
+                            <Button onClick={handleOpenMenu}>
                                 <Avatar sx={{ bgcolor: "#ff6800" }}>{getUser.name !== "" ? getUser.name.slice(0, 1) : "A"}</Avatar>
                             </Button>
                         </Tooltip>
@@ -185,6 +150,14 @@ const NavBar = () => {
                             </Button>
                         </Tooltip>
                     }
+                    <Menu
+                        id="basic-menu"
+                        open={open}
+                        anchorEl={isOpenMenu}
+                        onClose={() => setIsOpenMenu(null)}
+                    >
+                        <MenuItem onClick={handleSignUp} sx={{ gap: 2 }}>SignOut <ExitToApp /></MenuItem>
+                    </Menu>
                 </Box>
                 <Box>
                     <Tooltip title="Favorite(s)" placement="bottom">

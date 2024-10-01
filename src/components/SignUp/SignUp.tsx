@@ -15,7 +15,8 @@ function SignUp() {
         pass: "",
     })
 
-    const handleSignUp = () => {
+    const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         if (isOpen) {
             dispatch(singUpStatus())
             localStorage.setItem("user", JSON.stringify(user))
@@ -42,7 +43,6 @@ function SignUp() {
 
         }}>
             <Box
-                component="form"
                 sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -57,48 +57,75 @@ function SignUp() {
                 }}
                 ref={signUpRef}
             >
-                <Typography component="p" sx={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold"
-                }}>Sign Up</Typography>
-                <Box sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1
-                }}>
-                    <Person sx={{ fontSize: "2rem", color: "rgba(0,0,0,0.8)" }} />
-                    <TextField label="name" variant="outlined" value={user.name} onChange={e => setUser({ ...user, name: e.target.value })} />
-                </Box>
-                <Box sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1
-                }}>
-                    <Mail sx={{ fontSize: "2rem", color: "rgba(0,0,0,0.8)" }} />
-                    <TextField label="mail" variant="outlined" value={user.mail} onChange={e => setUser({ ...user, mail: e.target.value })} />
-                </Box>
-                <Box sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1
-                }}>
-                    <Password sx={{ fontSize: "2rem", color: "rgba(0,0,0,0.8)" }} />
-                    <TextField label="password" variant="outlined" type="password" value={user.pass} onChange={e => setUser({ ...user, pass: e.target.value })} />
-                </Box>
-                <Button
-                    sx={{
-                        width: "50%",
-                        backgroundColor: "#3e58ff",
-                        color: "#fff",
-                        padding: 2,
-                        "&: hover": {
-                            backgroundColor: "#3547bf"
-                        }
-                    }}
-                    onClick={handleSignUp}
-                >
-                    Submit
-                </Button>
+                <form onSubmit={handleSignUp}>
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: 2
+                    }}>
+                        <Typography component="p" sx={{
+                            fontSize: "1.5rem",
+                            fontWeight: "bold"
+                        }}>Sign Up</Typography>
+                        <Box sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1
+                        }}>
+                            <Person sx={{ fontSize: "2rem", color: "rgba(0,0,0,0.8)" }} />
+                            <TextField
+                                label="name"
+                                variant="outlined"
+                                value={user.name}
+                                onChange={e => setUser({ ...user, name: e.target.value })}
+                            />
+                        </Box>
+                        <Box sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1
+                        }}>
+                            <Mail sx={{ fontSize: "2rem", color: "rgba(0,0,0,0.8)" }} />
+                            <TextField
+                                label="mail"
+                                type="email"
+                                variant="outlined"
+                                value={user.mail}
+                                onChange={e => setUser({ ...user, mail: e.target.value })}
+                            />
+                        </Box>
+                        <Box sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1
+                        }}>
+                            <Password sx={{ fontSize: "2rem", color: "rgba(0,0,0,0.8)" }} />
+                            <TextField
+                                label="password"
+                                variant="outlined"
+                                type="password"
+                                value={user.pass}
+                                onChange={e => setUser({ ...user, pass: e.target.value })}
+                            />
+                        </Box>
+                        <Button
+                            sx={{
+                                width: "50%",
+                                backgroundColor: "#3e58ff",
+                                color: "#fff",
+                                padding: 2,
+                                "&: hover": {
+                                    backgroundColor: "#3547bf"
+                                }
+                            }}
+                            type="submit"
+                        >
+                            Submit
+                        </Button>
+                    </Box>
+                </form>
             </Box>
         </Box>
     )
