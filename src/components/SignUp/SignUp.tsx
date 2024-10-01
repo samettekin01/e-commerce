@@ -39,8 +39,8 @@ function SignUp() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backdropFilter: "blur(10px)"
-
+            backdropFilter: "blur(10px)",
+            zIndex: 9999
         }}>
             <Box
                 sx={{
@@ -63,6 +63,7 @@ function SignUp() {
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center",
+                        width: "100%",
                         gap: 2
                     }}>
                         <Typography component="p" sx={{
@@ -112,7 +113,7 @@ function SignUp() {
                         </Box>
                         <Button
                             sx={{
-                                width: "50%",
+                                width: "100%",
                                 backgroundColor: "#3e58ff",
                                 color: "#fff",
                                 padding: 2,

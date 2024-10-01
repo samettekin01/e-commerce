@@ -6,6 +6,7 @@ import { totalCalculate } from './components/slice/shopSlice';
 import { useAppDispatch, useAppSelector } from './components/utils/store';
 import SignUp from './components/SignUp/SignUp';
 import Slider from './components/slider/slider';
+import Fouter from './components/Fouter/Fouter';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
       {!id && !location.pathname.match(pathReg) && <Slider />}
       <Outlet />
       {isOpen && <SignUp />}
+      <Fouter />
     </Box>
   );
 }

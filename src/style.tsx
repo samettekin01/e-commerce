@@ -45,3 +45,20 @@ export const popupStyle = {
     padding: 2,
     "&:hover": { backgroundColor: "#000", color: "#fff" }
 }
+
+export const icon = {
+    color: "#1976d2", fontSize: "2rem"
+}
+
+export const footerAbout = {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "40%",
+    minWidth: "340px",
+    alignItems: "center",
+    margin: 1,
+    padding: 1,
+    ".MuiTypography-root": {
+        justifyContent: "start"
+    }
+}
