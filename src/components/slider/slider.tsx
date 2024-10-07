@@ -57,7 +57,7 @@ function Slider() {
             setCurrentIndex((currentIndex - 1 + sliderLength) % sliderLength)
             setStyle(prevStyle => ({
                 ...prevStyle,
-                transform: `translateX(-${(currentIndex - 1 + sliderLength) % sliderLength * 20}%)`
+                transform: `translateX(-${(currentIndex - 1 + sliderLength) % sliderLength * (100 / sliderLength)}%)`
             }))
             setTimeout(() => {
                 setIsActive(true)
