@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from './components/utils/store';
 import SignUp from './components/SignUp/SignUp';
 import Slider from './components/slider/slider';
 import Fouter from './components/Fouter/Fouter';
+import Github from './assets/Github';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
       <Outlet />
       {isOpen && <SignUp />}
       <Fouter />
+      <Github />
     </Box>
   );
 }
