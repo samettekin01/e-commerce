@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getDetailProduct } from "../slice/productsSlice";
 import { useParams } from "react-router-dom";
-import { Button, Card, CardContent, Typography, CircularProgress, Rating, Box } from "@mui/material";
+import { Button, Typography, CircularProgress, Rating, Box } from "@mui/material";
 import { Product } from "../../types/types";
 import { totalCalculate } from "../slice/shopSlice";
 import { useAppDispatch, useAppSelector } from "../utils/store";
@@ -52,56 +52,85 @@ const ProductDetail: React.FC = () => {
             sx={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: 2,
-                marginBottom: 2
+                marginBottom: 2,
+                backgroundColor: "#fff"
             }}
         >
             {productDetailStatus === "LOADING" ? <CircularProgress /> : productDetailStatus === "SUCCESS" &&
-                <Card sx={{ maxWidth: 500 }}>
-                    <Box
-                        sx={{
-                            backgroundImage: `url(${productDetail.image})`,
-                            backgroundPosition: "center",
-                            backgroundSize: "50%",
-                            backgroundRepeat: "no-repeat",
-                            height: 350,
-                        }}
-                    ></Box>
-                    <CardContent>
-                        <Rating sx={{ float: "right" }} value={productDetail.rating.rate} precision={0.2} readOnly />
-                        <Typography variant="h5" component="div">
-                            {productDetail.title}
-                        </Typography>
-                        <Typography variant="h6" component="div">
-                            {productDetail.description}
-                        </Typography>
-                        <Typography
-                            component={"span"}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                marginTop: 3
-                            }}>
+                <Box sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: { xs: "column", md: "row" },
+                    alignItems: { xs: "center" },
+                    margin: { xs: "0", md: "0 100px" },
+                    padding: { xs: 5, md: 10 }
+                }}>
+                    <Box sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "50%"
+                    }}>
+                        <img
+                            src={productDetail.image}
+                            style={{
+                                minWidth: 200,
+                                maxWidth: 250
+                            }}
+                            alt={productDetail.title}
+                        />
+                    </Box>
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        gap: 1,
+                        width: { xs: "100%", md: "50%" },
+                        height: "100%"
+                    }}>
+                        <Box sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 1,
+                        }}>
+                            <Typography variant="h5" component="div">
+                                {productDetail.title}
+                            </Typography>
+                            <Rating value={productDetail.rating.rate} precision={0.2} readOnly />
                             <Box
                                 component="span"
                                 sx={{
-                                    color: "#ff0000",
-                                    fontSize: "1.5rem"
+                                    color: "#000",
+                                    fontSize: "2rem",
+                                    fontWeight: "bold"
                                 }}
                             >{productDetail.price} $</Box>
-                            <Box>
-                                <Button
-                                    variant="contained"
-                                    onClick={addBasket}
-                                >Add Basket</Button>
-                                <Button onClick={handleFavorite}>
-                                    {favorite !== -1 ? <Favorite /> : <FavoriteBorder />}
-                                </Button>
-                            </Box>
-                        </Typography>
-                    </CardContent>
-                </Card>
+                            <Typography
+                                variant="h6"
+                                component="span"
+                                sx={{
+                                    marginTop: 2,
+                                    borderBottom: 1,
+                                    borderBottomColor: "rgba(0,0,0,0.5)"
+                                }}
+                            >
+                                Description
+                            </Typography>
+                            <Typography component="span" sx={{ color: "rgb(107, 114, 128, 0.9)" }}>
+                                {productDetail.description}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ marginLeft: "auto" }}>
+                            <Button
+                                variant="contained"
+                                onClick={addBasket}
+                            >Add Basket</Button>
+                            <Button onClick={handleFavorite}>
+                                {favorite !== -1 ? <Favorite /> : <FavoriteBorder />}
+                            </Button>
+                        </Box>
+                    </Box>
+                </Box>
             }
         </Box>
     )
