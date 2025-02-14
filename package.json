@@ -56,7 +56,6 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.0.5",
-    "@types/react-slick": "^0.23.11",
-    "sass": "^1.69.5"
+    "@types/react-slick": "^0.23.11"
   }
 }

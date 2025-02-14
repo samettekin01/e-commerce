@@ -1,11 +1,11 @@
-import NavBar from './components/navBar/navbar';
+import NavBar from './components/NavBar/NavBar';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
-import { totalCalculate } from './components/slice/shopSlice';
-import { useAppDispatch, useAppSelector } from './components/utils/store';
+import { totalCalculate } from './redux/slice/shopSlice';
+import { useAppDispatch, useAppSelector } from './redux/slice/store';
 import SignUp from './components/SignUp/SignUp';
-import Slider from './components/slider/slider';
+import Slider from './components/Slider/Slider';
 import Fouter from './components/Fouter/Fouter';
 import Github from './assets/Github';
 

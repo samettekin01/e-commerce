@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { getDetailProduct } from "../slice/productsSlice";
+import { getDetailProduct } from "../../redux/slice/productsSlice";
 import { useParams } from "react-router-dom";
 import { Button, Typography, CircularProgress, Rating, Box } from "@mui/material";
 import { Product } from "../../types/types";
-import { totalCalculate } from "../slice/shopSlice";
-import { useAppDispatch, useAppSelector } from "../utils/store";
+import { totalCalculate } from "../../redux/slice/shopSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/slice/store";
 import { useFavorite } from "../utils/useFavorite";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 

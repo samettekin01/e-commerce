@@ -1,7 +1,7 @@
 import { Search } from "@mui/icons-material"
 import { useEffect, useRef, useState } from "react"
 import { Box, Button, Collapse, List, ListItem, ListItemButton, ListItemText, TextField } from "@mui/material"
-import { useAppSelector } from "../utils/store"
+import { useAppSelector } from "../../redux/slice/store"
 import { Product } from "../../types/types"
 import { Link } from "react-router-dom"
 import { style } from "../../style"

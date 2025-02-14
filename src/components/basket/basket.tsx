@@ -6,8 +6,8 @@ import {
     TableRow, TableHead, TableCell, Table, Box
 } from '@mui/material'
 import { ArrowLeft, ArrowRight, Delete } from "@mui/icons-material"
-import { grandTotal, totalCalculate } from "../slice/shopSlice"
-import { useAppDispatch, useAppSelector } from "../utils/store"
+import { grandTotal, totalCalculate } from "../../redux/slice/shopSlice"
+import { useAppDispatch, useAppSelector } from "../../redux/slice/store"
 
 
 const Basket: React.FC = () => {

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { getProducts } from "../slice/productsSlice";
-import CardContainer from "../card/card";
+import { getProducts } from "../../redux/slice/productsSlice";
+import CardContainer from "../Card/Card";
 import { Box, CircularProgress } from "@mui/material"
-import { useAppDispatch, useAppSelector } from "../utils/store";
+import { useAppDispatch, useAppSelector } from "../../redux/slice/store";
 import Filter from "../Filter/Filter";
 import useFilter from "../utils/useFilter";
 
@@ -12,7 +12,7 @@ const Products = () => {
     const { sort, handleFilter, filterVal } = useFilter({ products })
 
     useEffect(() => {
-        dispatch(getProducts())
+        dispatch(getProducts({}))
     }, [dispatch])
 
     return (

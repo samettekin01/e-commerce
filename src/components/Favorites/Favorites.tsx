@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { Product } from "../../types/types"
-import CardContainer from "../card/card"
+import CardContainer from "../Card/Card"
 import { Alert, Box } from "@mui/material"
 
 function Favorites() {

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../utils/store"
-import { getCategory, getDetailProduct, getSliderProducts } from "../slice/productsSlice"
+import { useAppDispatch, useAppSelector } from "../../redux/slice/store"
+import { getCategory, getDetailProduct, getSliderProducts } from "../../redux/slice/productsSlice"
 import { Box, Button, CircularProgress } from "@mui/material"
 import { KeyboardArrowLeftOutlined, KeyboardArrowRightOutlined } from "@mui/icons-material"
 import { Link, useParams } from "react-router-dom"
@@ -101,7 +101,7 @@ function Slider() {
         if (categoryName) {
             dispatch(getCategory(String(categoryName)))
         } else {
-            dispatch(getSliderProducts())
+            dispatch(getSliderProducts({}))
         }
         window.addEventListener("resize", () => {
             setWidth(window.innerWidth)

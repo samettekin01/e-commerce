@@ -1,8 +1,8 @@
 import { Mail, Password, Person } from "@mui/icons-material"
 import { Box, Button, TextField, Typography } from "@mui/material"
 import { useEffect, useRef, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../utils/store"
-import { singUpStatus } from "../slice/statusSlice"
+import { useAppDispatch, useAppSelector } from "../../redux/slice/store"
+import { singUpStatus } from "../../redux/slice/statusSlice"
 import { UserInformation } from "../../types/types"
 
 function SignUp() {

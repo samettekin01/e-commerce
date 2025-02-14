@@ -1,9 +1,9 @@
 import { useEffect } from "react"
-import { getCategory } from "../slice/productsSlice"
+import { getCategory } from "../../redux/slice/productsSlice"
 import { useParams } from "react-router-dom"
-import CardContainer from "../card/card"
+import CardContainer from "../Card/Card"
 import { Box, CircularProgress } from "@mui/material"
-import { useAppDispatch, useAppSelector } from "../utils/store"
+import { useAppDispatch, useAppSelector } from "../../redux/slice/store"
 import useFilter from "../utils/useFilter"
 import Filter from "../Filter/Filter"
 
